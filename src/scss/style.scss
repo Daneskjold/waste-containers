@@ -1,0 +1,49 @@
+@use 'libs/reboot';
+@use 'libs/fonts';
+
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    font-weight: 500;
+}
+
+.container {
+    width: 1140px;
+    margin: 0 auto;
+}
+
+// Прижатый футер начало
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex-grow: 1;
+}
+// Прижатый футер конец
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}

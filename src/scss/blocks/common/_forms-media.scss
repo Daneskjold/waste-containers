@@ -1,0 +1,8 @@
+@use 'base/mixins' as m;
+
+@include m.mobile {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

@@ -6,24 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary Meta Tags -->
-    <title>Document</title>
-    <meta name="description"
-        content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, X and more!" />
+    <title>Тестовое задание</title>
+    <meta name="description" content="Тестовое задание" />
 
     <!-- Open Graph / Facebook --><!-- Meta Tags Generated with https://metatags.io -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://metatags.io/" />
-    <meta property="og:title" content="Meta Tags — Preview, Edit and Generate" />
-    <meta property="og:description"
-        content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, X and more!" />
+    <meta property="og:url" content="https://тест.ру/" />
+    <meta property="og:title" content="Тестовое задание" />
+    <meta property="og:description" content="Тестовое задание" />
     <meta property="og:image" content="https://metatags.io/images/meta-tags.png" />
 
     <!-- X (Twitter) -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://metatags.io/" />
-    <meta property="twitter:title" content="Meta Tags — Preview, Edit and Generate" />
-    <meta property="twitter:description"
-        content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, X and more!" />
+    <meta property="twitter:url" content="https://тест.ру/" />
+    <meta property="twitter:title" content="Тестовое задание" />
+    <meta property="twitter:description" content="Тестовое задание" />
     <meta property="twitter:image" content="https://metatags.io/images/meta-tags.png" />
 
 
@@ -48,25 +45,38 @@
     <link rel="stylesheet" href="css/style.min.css">
 </head>
 
-<body>
-    <div class="wrapper">
-        <header class="header">
+<body class="login-page">
 
-        </header>
+    <main class="login">
+        <section class="login__card" aria-labelledby="login-title">
+            <h1 class="login__title" id="login-title">Учёт контейнеров</h1>
+            <p class="login__subtitle">Войдите для доступа к системе</p>
 
-        <main class="main">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eos alias vitae ipsam? Non unde ipsam
-            nostrum, hic sapiente ipsa mollitia. Itaque, aliquam dolorem? Voluptatem reiciendis culpa totam ratione
-            mollitia!
-            Et, quibusdam neque nam ratione delectus repellendus ipsa reiciendis accusantium totam, repellat libero
-            error. Impedit tenetur corrupti at similique iure, obcaecati eligendi ducimus exercitationem et incidunt
-            nihil, aut maiores temporibus.
-        </main>
+            <form class="login__form" id="loginForm">
+                <fieldset class="login__fieldset">
+                    <div class="form-group">
+                        <label class="form-group__label" for="username">Логин</label>
+                        <input class="form-group__input" type="text" id="username" name="username"
+                            autocomplete="username" placeholder="Введите логин" required>
+                    </div>
 
-        <footer class="footer">
+                    <div class="form-group">
+                        <label class="form-group__label" for="password">Пароль</label>
+                        <input class="form-group__input" type="password" id="password" name="password"
+                            autocomplete="current-password" placeholder="Введите пароль" required>
+                    </div>
+                </fieldset>
 
-        </footer>
-    </div>
+                <p class="login__error" id="loginError" role="alert" hidden>
+                    Неверный логин или пароль
+                </p>
+
+                <button class="btn btn--primary btn--full" type="submit">
+                    Войти
+                </button>
+            </form>
+        </section>
+    </main>
 
     <script src="js/script.min.js"></script>
 </body>

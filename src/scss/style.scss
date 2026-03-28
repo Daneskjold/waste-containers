@@ -4,6 +4,27 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
+@use 'blocks/common/forms';
+@use 'blocks/common/forms-media'; 
+@use 'blocks/common/buttons';
+@use 'blocks/common/modal';
+@use 'blocks/common/modal-media';
+@use 'blocks/common/notification';
+
+@use 'blocks/login/login';
+// @use 'blocks/buildings/buildings';
+// @use 'blocks/companies/companies';
+// @use 'blocks/dashboard/dashboard';
+// @use 'blocks/platform-form/platform-form';
+// @use 'blocks/platforms/platforms';
+
+@use 'blocks/login/login-media';
+// @use 'blocks/buildings/buildings-media';
+// @use 'blocks/companies/companies-media';
+// @use 'blocks/dashboard/dashboard-media';
+// @use 'blocks/platform-form/platform-form-media';
+// @use 'blocks/platforms/platforms-media';
+
 html {
     scroll-behavior: smooth;
 }

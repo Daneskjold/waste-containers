@@ -1,8 +1,50 @@
-// @mixin text-fz12bold {
-//     font-size: 12px;
-//     font-weight: 700;
-//     text-transform: uppercase;
-//     letter-spacing: 1px;
-// }
+$breakpoint-lg: 1024px;
+$breakpoint-md: 768px;
+$breakpoint-sm: 480px;
 
-// @include m.before_circle;
+@use 'variables' as v;
+
+// Медиа-запросы
+@mixin desktop {
+    @media (max-width: $breakpoint-lg) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: $breakpoint-md) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: $breakpoint-sm) {
+        @content;
+    }
+}
+
+// Обрезка текста
+@mixin text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Flex-центрирование
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Flex-между
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// Transition
+@mixin transition($props: all, $duration: 0.2s) {
+    transition: $props $duration ease;
+}

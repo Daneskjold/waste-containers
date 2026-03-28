@@ -1,0 +1,11 @@
+@use 'base/mixins' as m;
+
+@include m.mobile {
+    .login__card {
+        padding: 32px 24px;
+    }
+
+    .login__title {
+        font-size: 20px;
+    }
+}

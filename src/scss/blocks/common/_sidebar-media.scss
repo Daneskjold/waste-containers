@@ -1,0 +1,129 @@
+@use 'base/mixins' as m;
+
+@include m.tablet {
+    .sidebar {
+        width: 100%;
+        padding: 16px 0;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .sidebar__top {
+        margin-bottom: 0;
+        padding: 0 16px;
+    }
+
+    // .sidebar__logo {
+    //     margin-bottom: 0;
+    //     padding: 0 16px;
+    // }
+
+    .sidebar__list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .sidebar__link {
+        padding: 8px 12px;
+        font-size: 14px;
+        border-right: none; 
+        border-bottom: 3px solid transparent;
+
+        &--active {
+            border-right: none;
+            border-bottom: 3px solid var(--color-primary);
+        }
+    }
+
+    .sidebar__icon {
+        display: none;
+    }
+
+    .sidebar__logout {
+        margin-top: 0;
+        width: auto;
+        padding: 8px 16px;
+    }
+}
+
+@include m.mobile {
+    .sidebar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+        position: relative;
+    }
+
+    .sidebar__top {
+        padding: 16px;
+        margin-bottom: 0;
+    }
+
+    // .sidebar__logo {
+    //     text-align: center;
+    //     padding: 0 12px 12px;
+    //     border-bottom: 1px solid var(--color-sidebar-hover);
+    // }
+
+    // Показываем бургер
+    .sidebar__burger {
+        display: flex;
+    }
+
+    // Навигация скрыта по умолчанию
+
+    .sidebar__nav {
+        max-height: 0;
+        overflow: hidden;
+        @include m.transition(max-height, 0.3s);
+    }
+
+    // Навигация открыта
+
+    .sidebar__nav--open {
+        max-height: 100vh;
+    }
+
+    .sidebar__list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .sidebar__link {
+        padding: 14px 20px;
+        font-size: 15px;
+        gap: 12px;
+        border-right: none;
+        border-bottom: 1px solid var(--color-sidebar-hover);
+        border-left: 3px solid transparent;
+
+        &--active {
+            border-right: none;
+            border-bottom: 1px solid var(--color-sidebar-hover);
+            border-left: 3px solid var(--color-primary);
+        }
+    }
+
+    .sidebar__icon {
+        display: inline;
+        font-size: 18px;
+        width: 24px;
+    }
+
+    // Кнопка выхода — скрыта пока меню закрыто
+
+    .sidebar__logout {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 20px;
+        @include m.transition(all, 0.3s);
+    }
+
+    .sidebar__logout--open {
+        max-height: 60px;
+        padding: 14px 20px;
+        text-align: left;
+        border-top: 1px solid var(--color-sidebar-hover);
+    }
+}

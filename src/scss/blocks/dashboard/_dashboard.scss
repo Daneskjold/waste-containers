@@ -1,0 +1,65 @@
+@use 'base/mixins' as m;
+
+// ============================================
+// ОСНОВНОЙ КОНТЕНТ DASHBOARD
+// ============================================
+.dashboard {
+    flex: 1;
+    padding: 32px;
+    overflow-y: auto;
+    background: var(--color-bg);
+
+    &__header {
+        @include m.flex-between;
+        margin-bottom: 24px;
+    }
+
+    &__title {
+        font-size: 24px;
+        font-weight: var(--font-medium);
+    }
+
+    // ============================================
+    // СТАТИСТИКА
+    // ============================================
+    &__stats {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+}
+
+// ============================================
+// КАРТОЧКА СТАТИСТИКИ
+// ============================================
+.stat-card {
+    background: var(--color-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    flex: 1;
+    min-width: 200px;
+
+    &__icon {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    &__value {
+        font-size: 32px;
+        font-weight: var(--font-medium);
+        color: var(--color-text);
+        margin: 0;
+    }
+
+    &__label {
+        font-size: 14px;
+        font-weight: var(--font-light);
+        color: var(--color-text-light);
+    }
+}

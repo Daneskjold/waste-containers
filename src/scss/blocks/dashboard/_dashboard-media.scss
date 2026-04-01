@@ -1,0 +1,23 @@
+@use 'base/mixins' as m;
+
+@include m.tablet {
+    .dashboard {
+        padding: 20px;
+    }
+
+    // .dashboard__header {
+    //     flex-direction: column;
+    //     align-items: flex-start;
+    //     gap: 12px;
+    // }
+}
+
+@include m.mobile {
+    .dashboard__stats {
+        flex-direction: column;
+    }
+
+    .stat-card {
+        min-width: auto;
+    }
+}

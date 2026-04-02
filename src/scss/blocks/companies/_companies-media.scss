@@ -1,0 +1,19 @@
+@use 'base/mixins' as m;
+
+@include m.tablet {
+    .companies {
+        padding: 20px;
+        &__header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+    }
+}
+@include m.mobile {
+    .companies {
+        &__title {
+            font-size: 20px;
+        }
+    }
+}

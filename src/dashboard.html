@@ -7,15 +7,13 @@
 
     <!-- Primary Meta Tags -->
     <title>Тестовое задание</title>
-    <meta name="description"
-        content="Тестовое задание" />
+    <meta name="description" content="Тестовое задание" />
 
     <!-- Open Graph / Facebook --><!-- Meta Tags Generated with https://metatags.io -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://тест.ру/" />
     <meta property="og:title" content="Тестовое задание" />
-    <meta property="og:description"
-        content="Тестовое задание" />
+    <meta property="og:description" content="Тестовое задание" />
     <meta property="og:image" content="https://metatags.io/images/meta-tags.png" />
 
     <!-- X (Twitter) -->
@@ -48,7 +46,6 @@
 </head>
 
 <body>
-
     <div class="layout">
 
         <aside class="sidebar" aria-label="Боковая панель">
@@ -66,7 +63,7 @@
             <nav class="sidebar__nav" id="sidebarNav" aria-label="Основная навигация">
                 <ul class="sidebar__list">
                     <li class="sidebar__item">
-                        <a href="dashboard.html" class="sidebar__link" aria-current="page">
+                        <a href="dashboard.html" class="sidebar__link sidebar__link--active" aria-current="page">
                             <span class="sidebar__icon" aria-hidden="true">📊</span>
                             Главная
                         </a>
@@ -78,7 +75,7 @@
                         </a>
                     </li>
                     <li class="sidebar__item">
-                        <a href="companies.html" class="sidebar__link sidebar__link--active">
+                        <a href="companies.html" class="sidebar__link">
                             <span class="sidebar__icon" aria-hidden="true">🏢</span>
                             Компании
                         </a>
@@ -97,90 +94,48 @@
             </button>
         </aside>
 
-        <main class="companies">
+        <main class="dashboard">
 
-            <div class="companies__header">
-                <h1 class="companies__title">Управляющие компании</h1>
-                <button class="btn btn--primary" type="button" id="addCompanyBtn">
-                    <span class="btn__icon" aria-hidden="true">+</span>
-                    <span class="btn__text">Добавить</span>
-                </button>
-            </div>
+            <header class="dashboard__header">
+                <h1 class="dashboard__title">Главная</h1>
+            </header>
 
-            <div class="companies__body card">
-                
-                    <table class="card__data-table" >
-                        <caption class="visually-hidden" id="companies-caption">Список управляющих компаний</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">Название</th>
-                                <th scope="col">Телефон</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody id="companiesTableBody">
-                        </tbody>
-                    </table>
-                
+            <section class="dashboard__stats">
+                <h2 class="dashboard__stats-title visually-hidden">Статистика</h2>
+                <div class="stat-card">
+                    <div class="stat-card__icon" aria-hidden="true">📍</div>
+                    <dl class="stat-card__data">
+                        <dt class="stat-card__label">Площадок</dt>
+                        <dd class="stat-card__value" id="countPlatforms">0</dd>
+                    </dl>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__icon" aria-hidden="true">🗑️</div>
+                    <dl class="stat-card__data">
+                        <dt class="stat-card__label">Контейнеров</dt>
+                        <dd class="stat-card__value" id="countContainers">0</dd>
+                    </dl>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__icon" aria-hidden="true">🏢</div>
+                    <dl class="stat-card__data">
+                        <dt class="stat-card__label">Компаний</dt>
+                        <dd class="stat-card__value" id="countCompanies">0</dd>
+                    </dl>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__icon" aria-hidden="true">🏠</div>
+                    <dl class="stat-card__data">
+                        <dt class="stat-card__label">Домов</dt>
+                        <dd class="stat-card__value" id="countBuildings">0</dd>
+                    </dl>
+                </div>
 
-                <p class="card__empty-state empty-state" id="emptyState" role="status" aria-live="polite" >
-                    <span class="empty-state__icon" aria-hidden="true">🏢</span>
-                    <span class="empty-state__text">Компании ещё не добавлены</span>
-                </p>
-            </div>
 
+
+            </section>
         </main>
 
-    </div>
-
-    <!-- Модалка: Добавить / Редактировать -->
-    <div class="modal-overlay" id="companyModal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
-        <div class="modal">
-            <h2 class="modal__title" id="modalTitle">Добавить компанию</h2>
-            <form id="companyForm">
-                <input type="hidden" id="companyId">
-
-                <div class="form-group">
-                    <label class="form-group__label" for="companyName">Название *</label>
-                    <input class="form-group__input" type="text" id="companyName"
-                        placeholder="ООО «ЭкоСервис»" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-group__label" for="companyPhone">Телефон</label>
-                    <input class="form-group__input" type="tel" id="companyPhone"
-                        placeholder="+7 (999) 123-45-67">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-group__label" for="companyEmail">Email</label>
-                    <input class="form-group__input" type="email" id="companyEmail"
-                        placeholder="info@company.ru">
-                </div>
-
-                <div class="modal__buttons">
-                    <button type="button" class="btn btn--outline" id="cancelCompanyBtn">
-                        Отмена
-                    </button>
-                    <button type="submit" class="btn btn--primary">
-                        Сохранить
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Модалка: Подтверждение удаления -->
-    <div class="modal-overlay" id="deleteModal" role="dialog" aria-labelledby="deleteTitle" aria-modal="true">
-        <div class="modal">
-            <h2 class="modal__title" id="deleteTitle">Удалить компанию?</h2>
-            <p class="modal__text">Это действие нельзя отменить.</p>
-            <div class="modal__buttons">
-                <button class="btn btn--outline" type="button" id="cancelDeleteBtn">Отмена</button>
-                <button class="btn btn--danger" type="button" id="confirmDeleteBtn">Удалить</button>
-            </div>
-        </div>
     </div>
 
     <script src="js/script.min.js"></script>

@@ -1,0 +1,18 @@
+@use 'base/mixins' as m;
+
+.companies {
+    flex: 1;
+    padding: 32px;
+    overflow-y: auto;
+    background: var(--color-bg);
+    &__header {
+        @include m.flex-between;
+        margin-bottom: 24px;
+    }
+    
+    &__title {
+        font-size: 24px;
+        font-weight: var(--font-medium);
+        color: var(--color-text);
+    }
+}

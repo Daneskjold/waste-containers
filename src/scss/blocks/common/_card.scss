@@ -1,13 +1,73 @@
+@use 'base/mixins' as m;
+
 .card {
+    overflow-x: auto;
     background: var(--color-card);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: 24px;
-    margin-bottom: 24px;
+
+    &__title {
+        font-size: 16px;
+        font-weight: var(--font-medium);
+        margin-bottom: 16px;
+    }
+
+    &__data-table {
+        width: 100%;
+        font-size: 15px;
+        font-weight: var(--font-regular);
+
+        thead {
+            background: var(--color-bg);
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: var(--font-medium);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-light);
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        tbody tr {
+            @include m.transition(background-color);
+
+            &:hover {
+                background: var(--color-hover);
+            }
+        }
+    }
+
+    &__actions {
+        display: flex;
+        gap: 8px;
+    }
 }
 
-.card__title {
-    font-size: 16px;
-    font-weight: var(--font-medium);
-    margin-bottom: 16px;
+// ============================================
+// ПУСТОЕ СОСТОЯНИЕ
+// ============================================
+.empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--color-text-light);
+
+    &__icon {
+        display: block;
+        font-size: 48px;
+        margin-bottom: 12px;
+    }
+
+    &__text {
+        font-size: 16px;
+        font-weight: var(--font-regular);
+    }
 }

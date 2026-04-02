@@ -1,0 +1,32 @@
+@use 'base/mixins' as m;
+
+@include m.tablet {
+    .card {
+        &__actions {
+            flex-direction: column;
+            gap: 4px;
+        }
+    }
+}
+
+@include m.mobile {
+    .card {
+        padding: 12px;
+
+        &__data-table {
+
+            th,
+            td {
+                padding: 8px 10px;
+            }
+        }
+    }
+
+    .empty-state {
+        padding: 32px 16px;
+
+        &__icon {
+            font-size: 36px;
+        }
+    }
+}

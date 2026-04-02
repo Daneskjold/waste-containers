@@ -1,7 +1,7 @@
 @use 'base/mixins' as m;
 
 @include m.tablet {
-    .companies {
+    .buildings {
         padding: 20px;
 
         &__header {
@@ -13,7 +13,7 @@
 }
 
 @include m.mobile {
-    .companies {
+    .buildings {
         &__title {
             font-size: 20px;
         }

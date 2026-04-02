@@ -13,16 +13,16 @@
         margin-bottom: 16px;
     }
 
-    &__data-table {
+    &__table {
         width: 100%;
         font-size: 15px;
         font-weight: var(--font-regular);
 
-        thead {
+        .table__head {
             background: var(--color-bg);
         }
 
-        th {
+        .table__cell {
             padding: 12px 16px;
             text-align: left;
             font-weight: var(--font-medium);

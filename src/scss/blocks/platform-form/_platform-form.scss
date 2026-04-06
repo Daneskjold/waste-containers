@@ -1,0 +1,107 @@
+@use 'base/mixins' as m;
+
+.platform-form {
+    flex: 1;
+    padding: 32px;
+    overflow-y: auto;
+    background: var(--color-bg);
+
+    &__title {
+        margin-bottom: 24px;
+        font-size: 24px;
+        font-weight: var(--font-medium);
+        color: var(--color-text);
+    }
+
+    &__section {
+        padding: 24px;
+        margin: 0 0 24px 0;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    &__containers {
+        margin-bottom: 12px;
+    }
+
+    &__buildings {
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        padding: 8px;
+    }
+}
+
+// ============================================
+// ДИНАМИЧЕСКИЙ СПИСОК КОНТЕЙНЕРОВ
+// ============================================
+
+.container-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 12px;
+    background: var(--color-bg);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+
+    .form-group {
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    &__remove {
+        @include m.flex-center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        background: none;
+        border: none;
+        color: var(--color-danger);
+        font-size: 20px;
+        border-radius: var(--radius-sm);
+        flex-shrink: 0;
+        cursor: pointer;
+        @include m.transition;
+
+        &:hover {
+            background: var(--color-danger-light);
+        }
+    }
+}
+
+// ============================================
+// ЧЕКЛИСТ ДОМОВ
+// ============================================
+
+.building-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    @include m.transition(background-color);
+
+    &:hover {
+        background: var(--color-bg);
+    }
+
+    &__input {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--color-primary);
+        cursor: pointer;
+    }
+
+    &__text {
+        font-size: 15px;
+        font-weight: var(--font-regular);
+        color: var(--color-text);
+    }
+}

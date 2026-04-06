@@ -18,32 +18,32 @@
         font-size: 15px;
         font-weight: var(--font-regular);
 
-        .table__head {
-            background: var(--color-bg);
-        }
+        // .table__head {
+        //     background: var(--color-bg);
+        // }
 
-        .table__cell {
-            padding: 12px 16px;
-            text-align: left;
-            font-weight: var(--font-medium);
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--color-text-light);
-        }
+        // .table__cell {
+        //     padding: 12px 16px;
+        //     text-align: left;
+        //     font-weight: var(--font-medium);
+        //     font-size: 13px;
+        //     text-transform: uppercase;
+        //     letter-spacing: 0.5px;
+        //     color: var(--color-text-light);
+        // }
 
-        td {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--color-border);
-        }
+        // td {
+        //     padding: 12px 16px;
+        //     border-bottom: 1px solid var(--color-border);
+        // }
 
-        tbody tr {
-            @include m.transition(background-color);
+        // tbody tr {
+        //     @include m.transition(background-color);
 
-            &:hover {
-                background: var(--color-hover);
-            }
-        }
+        //     &:hover {
+        //         background: var(--color-hover);
+        //     }
+        // }
     }
 
     &__actions {
@@ -51,6 +51,38 @@
         gap: 8px;
     }
 }
+
+.table {
+
+    &__head {
+        background: var(--color-bg);
+    }
+
+    &__cell {
+        padding: 12px 16px;
+        text-align: left;
+        font-weight: var(--font-medium);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--color-text-light);
+    }
+
+    td {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    tbody tr {
+        @include m.transition(background-color);
+
+        &:hover {
+            background: var(--color-hover);
+        }
+    }
+}
+
+
 
 // ============================================
 // ПУСТОЕ СОСТОЯНИЕ

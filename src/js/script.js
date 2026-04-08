@@ -1,6 +1,7 @@
 // ============================================
 // БУРГЕР-МЕНЮ
 // ============================================
+
 function initBurger() {
     const burgerBtn = document.getElementById('burgerBtn');
     const sidebarNav = document.getElementById('sidebarNav');
@@ -8,15 +9,27 @@ function initBurger() {
 
     if (!burgerBtn || !sidebarNav) return;
 
+    const toggles = [
+        [burgerBtn, 'sidebar__burger--active'],
+        [sidebarNav, 'sidebar__nav--open'],
+        ...(logoutBtn ? [[logoutBtn, 'sidebar__logout--open']] : [])
+    ];
+
+    function setMenu(open) {
+        const method = open ? 'add' : 'remove';
+        toggles.forEach(([el, cls]) => el.classList[method](cls));
+        burgerBtn.setAttribute('aria-expanded', String(open));
+    }
+
     burgerBtn.addEventListener('click', () => {
-        const isOpen = burgerBtn.classList.contains('sidebar__burger--active');
+        setMenu(!sidebarNav.classList.contains('sidebar__nav--open'));
+    });
 
-        burgerBtn.classList.toggle('sidebar__burger--active');
-        burgerBtn.setAttribute('aria-expanded', !isOpen);
-        sidebarNav.classList.toggle('sidebar__nav--open');
-
-        if (logoutBtn) {
-            logoutBtn.classList.toggle('sidebar__logout--open');
+    document.addEventListener('click', (e) => {
+        if (sidebarNav.classList.contains('sidebar__nav--open') &&
+            !sidebarNav.contains(e.target) &&
+            !burgerBtn.contains(e.target)) {
+            setMenu(false);
         }
     });
 }
@@ -34,7 +47,9 @@ function showNotification(message, type = 'success') {
     document.body.appendChild(notification);
 
     requestAnimationFrame(() => {
-        notification.classList.add('notification--visible');
+        requestAnimationFrame(() => {
+            notification.classList.add('notification--visible');
+        });
     });
 
     setTimeout(() => {
@@ -308,245 +323,6 @@ function initPhoneMask() {
         }
     });
 }
-
-// // ============================================
-// // МАСКА ТЕЛЕФОНА — Оптимизированная версия
-// // ============================================
-// function initPhoneMask() {
-//     const phoneInput = document.getElementById('companyPhone');
-//     if (!phoneInput) return;
-
-//     phoneInput.setAttribute('autocomplete', 'off');
-
-//     // ── Константы ──────────────────────────────
-//     const PREFIX = '+7 (';
-//     const PREFIX_LEN = PREFIX.length;          // 4
-//     const MAX_DIGITS = 10;
-//     // Позиции разделителей после N-й цифры номера:
-//     // +7 (XXX) XXX-XX-XX
-//     //     123  456 78 90
-//     // После 3-й цифры: ") "  (2 символа)
-//     // После 6-й цифры: "-"   (1 символ)
-//     // После 8-й цифры: "-"   (1 символ)
-
-//     // Карта: индекс цифры → разделитель ПЕРЕД этой цифрой
-//     const SEPARATORS_BEFORE = {
-//         3: ') ',
-//         6: '-',
-//         8: '-'
-//     };
-
-//     // Предвычисленная карта: после N цифр → позиция курсора в отформатированной строке
-//     // Это избавляет от цикла в cursorAfterDigit()
-//     // +  7     (  X  X  X  )     X  X  X  -  X  X  -  X  X
-//     // 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17
-//     const CURSOR_MAP = [
-//         4,       // 0 цифр → после "("
-//         5,       // 1 цифра
-//         6,       // 2
-//         7,       // 3
-//         10,      // 4  (после ") ")
-//         11,      // 5
-//         12,      // 6
-//         14,      // 7  (после "-")
-//         15,      // 8
-//         17,      // 9  (после "-")
-//         18       // 10
-//     ];
-
-//     const ALLOWED_KEYS = new Set([
-//         'Backspace', 'Delete', 'Tab', 'Escape', 'Enter',
-//         'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
-//         'Home', 'End'
-//     ]);
-
-//     // ── Утилита: символ — цифра? ──────────────
-//     // Быстрее чем /\d/.test() — без создания объекта RegExp
-//     function isDigit(ch) {
-//         return ch >= '0' && ch <= '9';
-//     }
-
-//     // ── Извлечение цифр номера (без кода страны) ──
-//     function getDigits(value) {
-//         let raw = '';
-//         for (let i = 0; i < value.length; i++) {
-//             if (isDigit(value[i])) raw += value[i];
-//         }
-
-//         // Убираем код страны (7 или 8 в начале)
-//         if (raw.length > 0 && (raw[0] === '7' || raw[0] === '8')) {
-//             raw = raw.substring(1);
-//         }
-
-//         return raw.length > MAX_DIGITS ? raw.substring(0, MAX_DIGITS) : raw;
-//     }
-
-//     // ── Форматирование ────────────────────────
-//     function format(digits) {
-//         if (digits.length === 0) return PREFIX;
-
-//         let result = PREFIX;
-//         for (let i = 0; i < digits.length; i++) {
-//             const sep = SEPARATORS_BEFORE[i];
-//             if (sep) result += sep;
-//             result += digits[i];
-//         }
-//         return result;
-//     }
-
-//     // ── Позиция курсора после N-й цифры ───────
-//     function cursorAfterDigit(n) {
-//         // Используем предвычисленную карту — O(1)
-//         if (n < 0) return PREFIX_LEN;
-//         if (n > MAX_DIGITS) return CURSOR_MAP[MAX_DIGITS];
-//         return CURSOR_MAP[n];
-//     }
-
-//     // ── Подсчёт цифр номера до позиции курсора ─
-//     function digitsBeforePos(value, pos) {
-//         let count = 0;
-//         const limit = Math.min(pos, value.length);
-//         for (let i = PREFIX_LEN; i < limit; i++) {
-//             if (isDigit(value[i])) count++;
-//         }
-//         return count;
-//     }
-
-//     // ── Применение маски с сохранением курсора ─
-//     function applyMask() {
-//         const pos = phoneInput.selectionStart;
-//         const oldVal = phoneInput.value;
-
-//         const dBefore = digitsBeforePos(oldVal, pos);
-//         const digits = getDigits(oldVal);
-//         const formatted = format(digits);
-
-//         phoneInput.value = formatted;
-
-//         const newPos = cursorAfterDigit(dBefore);
-//         phoneInput.setSelectionRange(newPos, newPos);
-//     }
-
-//     // ── Ограничение курсора: не уходить в префикс ─
-//     function clampCursor() {
-//         if (phoneInput.selectionStart < PREFIX_LEN) {
-//             const pos = Math.max(PREFIX_LEN, phoneInput.selectionEnd);
-//             phoneInput.setSelectionRange(pos, pos);
-//         }
-//     }
-
-//     // ── Обработчики ───────────────────────────
-
-//     phoneInput.addEventListener('input', applyMask);
-
-//     phoneInput.addEventListener('focus', () => {
-//         if (!phoneInput.value || phoneInput.value.trim() === '') {
-//             phoneInput.value = PREFIX;
-//         }
-//         // setTimeout нужен, чтобы браузер успел установить фокус
-//         setTimeout(() => {
-//             const digits = getDigits(phoneInput.value);
-//             const formatted = format(digits);
-//             phoneInput.value = formatted;
-//             phoneInput.setSelectionRange(formatted.length, formatted.length);
-//         }, 0);
-//     });
-
-//     phoneInput.addEventListener('blur', () => {
-//         if (getDigits(phoneInput.value).length === 0) {
-//             phoneInput.value = '';
-//         }
-//     });
-
-//     phoneInput.addEventListener('keydown', (e) => {
-//         // Пропускаем комбинации с Ctrl/Cmd (копировать, вставить и т.д.)
-//         if (e.ctrlKey || e.metaKey) return;
-
-//         // Навигационные и управляющие клавиши
-//         if (ALLOWED_KEYS.has(e.key)) {
-//             const start = phoneInput.selectionStart;
-//             const end = phoneInput.selectionEnd;
-//             const val = phoneInput.value;
-
-//             // ── Backspace ──
-//             if (e.key === 'Backspace' && start === end) {
-//                 // Защита префикса
-//                 if (start <= PREFIX_LEN) {
-//                     e.preventDefault();
-//                     return;
-//                 }
-
-//                 // Перед курсором не цифра → перескакиваем и удаляем предыдущую цифру
-//                 if (!isDigit(val[start - 1])) {
-//                     e.preventDefault();
-//                     let p = start - 1;
-//                     while (p > PREFIX_LEN && !isDigit(val[p - 1])) p--;
-
-//                     if (p > PREFIX_LEN) {
-//                         phoneInput.value = val.substring(0, p - 1) + val.substring(p);
-//                         applyMask();
-//                     }
-//                     return;
-//                 }
-//             }
-
-//             // ── Delete ──
-//             if (e.key === 'Delete' && start === end) {
-//                 if (start >= val.length) {
-//                     e.preventDefault();
-//                     return;
-//                 }
-
-//                 // Под курсором не цифра → ищем следующую и удаляем
-//                 if (!isDigit(val[start])) {
-//                     e.preventDefault();
-//                     let p = start + 1;
-//                     while (p < val.length && !isDigit(val[p])) p++;
-
-//                     if (p < val.length) {
-//                         phoneInput.value = val.substring(0, p) + val.substring(p + 1);
-//                         applyMask();
-//                     }
-//                     return;
-//                 }
-//             }
-
-//             return;
-//         }
-
-//         // Разрешаем только цифры
-//         if (!isDigit(e.key)) {
-//             e.preventDefault();
-//             return;
-//         }
-
-//         // Проверка лимита (если нет выделения — нечего заменять)
-//         if (
-//             getDigits(phoneInput.value).length >= MAX_DIGITS &&
-//             phoneInput.selectionStart === phoneInput.selectionEnd
-//         ) {
-//             e.preventDefault();
-//         }
-//     });
-
-//     phoneInput.addEventListener('paste', (e) => {
-//         e.preventDefault();
-//         const text = (e.clipboardData || window.clipboardData).getData('text');
-//         const digits = getDigits(text);
-//         const formatted = format(digits);
-//         phoneInput.value = formatted;
-//         phoneInput.setSelectionRange(formatted.length, formatted.length);
-//     });
-
-//     // Клик и стрелки: не даём курсору уйти в префикс
-//     phoneInput.addEventListener('click', clampCursor);
-
-//     phoneInput.addEventListener('keyup', (e) => {
-//         if (e.key === 'ArrowLeft' || e.key === 'Home') {
-//             clampCursor();
-//         }
-//     });
-// }
 
 // ============================================
 // СТРАНИЦА: ЛОГИН

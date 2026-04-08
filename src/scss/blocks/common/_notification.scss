@@ -2,7 +2,7 @@
 
 .notification {
     position: fixed;
-    top: 20px;
+    top: 28px;
     right: 20px;
     padding: 14px 20px;
     border-radius: var(--radius-sm);
@@ -14,7 +14,7 @@
     @include m.transition(transform, 0.3s);
 
     &--visible {
-        transform: translateX(0);
+        transform: translateX(-20vw);
     }
 
     &--success {

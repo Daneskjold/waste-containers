@@ -88,9 +88,14 @@
 // ПУСТОЕ СОСТОЯНИЕ
 // ============================================
 .empty-state {
+    display: none;
     text-align: center;
     padding: 48px 24px;
     color: var(--color-text-light);
+
+    &--visible {
+        display: block;
+    }
 
     &__icon {
         display: block;
